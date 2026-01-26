@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG | He Be Giggin' O! - Ohio Tristate's Trusted Gig Work Partner</title>
+    <meta name="description" content="HBG delivers quality gig services across the Ohio Tristate Area. From delivery to sign language interpreting, we bring 30+ years of experience to every job.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed w-full nav-container backdrop-blur-sm z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg" data-customizer="logo">
+                        <span class="text-white font-extrabold text-xl" data-customizer="companyName">HBG</span>
+                    </div>
+                    <span class="text-outer-space font-bold text-xl hidden sm:block" data-customizer="tagline">He Be Giggin'!</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-outer-space hover:text-shakespeare transition font-medium">Home</a>
+                    <a href="#about" class="text-outer-space hover:text-shakespeare transition font-medium">About</a>
+                    <a href="#services" class="text-outer-space hover:text-shakespeare transition font-medium">Services</a>
+                    <a href="#team" class="text-outer-space hover:text-shakespeare transition font-medium">Team</a>
+                    <a href="#careers" class="text-outer-space hover:text-shakespeare transition font-medium">Join Us</a>
+                    <a href="#contact" class="gradient-bg text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition shadow-lg">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-outer-space" aria-label="Toggle menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mobile-menu border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Home</a>
+                <a href="#about" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">About</a>
+                <a href="#services" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Services</a>
+                <a href="#team" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Team</a>
+                <a href="#careers" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Join Us</a>
+                <a href="#contact" class="block gradient-bg text-white px-6 py-3 rounded-full font-semibold text-center">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-pattern min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="inline-block gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full mb-6 shadow-lg">
+                        🎉 Serving the Ohio Tristate Area
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-outer-space leading-tight mb-6" data-customizer="heroHeadline">
+                        Your Trusted Partner for <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#45b1d9] to-[#347baa]">Gig Work</span> Done Right
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed" data-customizer="heroSubheadline">
+                        With over <strong class="text-shakespeare">30 years</strong> of experience, HBG connects businesses with reliable, people-oriented service. When you work with us, you know exactly who you're getting.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl">
+                            Get Started Today
+                        </a>
+                        <a href="#services" class="border-2 border-shakespeare text-shakespeare px-8 py-4 rounded-full font-bold text-lg hover:bg-shakespeare hover:text-white transition">
+                            Explore Services
+                        </a>
+                    </div>
+                </div>
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-0 gradient-bg rounded-3xl transform rotate-6 opacity-20"></div>
+                    <div class="relative card-light rounded-3xl p-8 shadow-2xl">
+                        <div class="text-center">
+                            <div class="w-32 h-32 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl" data-customizer="logo">
+                                <span class="text-white font-extrabold text-5xl" data-customizer="companyName">HBG</span>
+                            </div>
+                            <p class="text-2xl font-bold text-outer-space mb-2" data-customizer="tagline">"He Be Giggin' O!"</p>
+                            <p class="text-gray-500">Quality • Friendly • Timely</p>
+                            <div class="mt-6 flex justify-center gap-4">
+                                <div class="card-light-inner px-4 py-2 rounded-lg">
+                                    <p class="text-shakespeare font-bold text-2xl">30+</p>
+                                    <p class="text-gray-500 text-sm">Years Experience</p>
+                                </div>
+                                <div class="card-light-inner px-4 py-2 rounded-lg">
+                                    <p class="text-shakespeare font-bold text-2xl">100%</p>
+                                    <p class="text-gray-500 text-sm">People-Oriented</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Partners Banner -->
+    <section class="platform-banner py-8 border-y">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 mb-6 font-medium">Experienced across leading platforms</p>
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">DoorDash</span>
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">Instacart</span>
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">Uber Eats</span>
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">GrubHub</span>
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">Veho</span>
+                <span class="text-outer-space font-semibold text-lg hover:text-shakespeare transition">Roadie</span>
+                <span class="text-shakespeare font-semibold text-lg">& More</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 hero-pattern-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">About HBG</span>
+                <h2 class="text-4xl font-extrabold mt-6 mb-4 text-white">Three Decades of Dedication</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We're not just another gig service — we're your neighbors, committed to bringing a personal touch to every job.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6 text-white">Why Choose HBG?</h3>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        In a world of faceless gig workers, HBG stands apart. When you partner with us, you're not rolling the dice on a random assignment — you're getting a trusted professional with over <strong class="text-shakespeare">30 years of freelancing experience</strong>.
+                    </p>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        We believe in building relationships, not just completing tasks. Our people-first approach means you always know who's showing up, and you can count on consistent, quality service every single time.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white">Know Who You're Working With</h4>
+                                <p class="text-gray-400">No surprises. Build a lasting professional relationship.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white">Timely & Reliable</h4>
+                                <p class="text-gray-400">Punctuality isn't optional — it's our standard.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-white">People-Oriented Service</h4>
+                                <p class="text-gray-400">Friendly, approachable, and genuinely caring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gradient-card rounded-3xl p-8 shadow-2xl">
+                    <div class="text-center">
+                        <div class="inline-block tag-shakespeare text-sm font-semibold px-4 py-2 rounded-full mb-6">
+                            Our Core Values
+                        </div>
+                        <div class="space-y-6">
+                            <div class="card-dark-transparent rounded-2xl p-6">
+                                <div class="text-4xl mb-3">⭐</div>
+                                <h4 class="text-xl font-bold text-white mb-2">Quality Service</h4>
+                                <p class="text-gray-400">Excellence isn't a goal — it's the baseline for everything we do.</p>
+                            </div>
+                            <div class="card-dark-transparent rounded-2xl p-6">
+                                <div class="text-4xl mb-3">🤝</div>
+                                <h4 class="text-xl font-bold text-white mb-2">Friendly Approach</h4>
+                                <p class="text-gray-400">We treat every client like a neighbor, because community matters.</p>
+                            </div>
+                            <div class="card-dark-transparent rounded-2xl p-6">
+                                <div class="text-4xl mb-3">⏱️</div>
+                                <h4 class="text-xl font-bold text-white mb-2">Timely Delivery</h4>
+                                <p class="text-gray-400">Your time is valuable. We respect it by always being on schedule.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 section-services">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">Our Services</span>
+                <h2 class="text-4xl font-extrabold mt-6 mb-4 text-outer-space">Versatile Solutions for Your Business</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">From deliveries to specialized interpreting, HBG brings professional expertise to a wide range of services.</p>
+            </div>
+            
+            <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Services are rendered dynamically by the customizer -->
+                <!-- Default services shown if JS hasn't loaded yet -->
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">Delivery Services</h3>
+                    <p class="text-gray-600 leading-relaxed">Fast, reliable delivery through platforms like DoorDash, Instacart, Uber Eats, GrubHub, Veho, Roadie, and more. Your packages and meals arrive on time, every time.</p>
+                </div>
+                
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">Sign Language Interpreting</h3>
+                    <p class="text-gray-600 leading-relaxed">Professional ASL interpretation services that bridge communication gaps. Experienced, certified, and committed to facilitating clear, meaningful connections.</p>
+                </div>
+                
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">Warehouse Shifts</h3>
+                    <p class="text-gray-600 leading-relaxed">Dependable warehouse support when you need it. From inventory management to order fulfillment, we bring energy and efficiency to your operations.</p>
+                </div>
+                
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">Driving Services</h3>
+                    <p class="text-gray-600 leading-relaxed">Professional driving for various needs. Whether it's transporting goods or providing rideshare services, count on safe, courteous, and timely transportation.</p>
+                </div>
+                
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">Retail Support</h3>
+                    <p class="text-gray-600 leading-relaxed">Flexible retail staffing solutions for your store. Friendly, customer-focused support that represents your brand with professionalism and care.</p>
+                </div>
+                
+                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-outer-space">And More</h3>
+                    <p class="text-gray-600 leading-relaxed">Have a unique need? Let's talk! With three decades of diverse experience, we're adaptable and ready to tackle new challenges. Just ask.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-flex items-center gap-2 gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl">
+                    Discuss Your Needs
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="py-24 hero-pattern-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="gradient-horizontal rounded-3xl p-12 shadow-2xl">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="bg-white/20 text-white text-sm font-semibold px-4 py-2 rounded-full">Join Our Team</span>
+                        <h2 class="text-4xl font-extrabold text-white mt-6 mb-4">Ready to Start Giggin'?</h2>
+                        <p class="text-xl text-white/90 mb-6 leading-relaxed">
+                            Looking for flexible work opportunities in the Ohio Tristate Area? We're always interested in connecting with reliable, friendly professionals who share our commitment to quality.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-white">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Flexible scheduling that works for you
+                            </li>
+                            <li class="flex items-center gap-3 text-white">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Diverse opportunities across multiple industries
+                            </li>
+                            <li class="flex items-center gap-3 text-white">
+                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Be part of a people-first organization
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block bg-outer-space text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl">
+                            Get In Touch
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                            <div class="text-6xl mb-4">🚀</div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Your Next Opportunity Awaits</h3>
+                            <p class="text-white/80">Join HBG and be part of a team that values quality, reliability, and genuine human connection in every gig.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-green-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">Contact Us</span>
+                <h2 class="text-4xl font-extrabold mt-6 mb-4 text-outer-space">Let's Work Together</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Ready to experience the HBG difference? Reach out today and let's discuss how we can support your business needs.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-outer-space rounded-3xl p-8 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-300 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full rounded-xl px-4 py-3 text-white transition" placeholder="John Smith">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-300 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required class="form-input w-full rounded-xl px-4 py-3 text-white transition" placeholder="john@company.com">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-gray-300 font-medium mb-2">Service Interested In</label>
+                            <select id="service" name="service" class="form-input w-full rounded-xl px-4 py-3 text-white transition">
+                                <option value="">Select a service</option>
+                                <option value="Delivery Services">Delivery Services</option>
+                                <option value="Sign Language Interpreting">Sign Language Interpreting</option>
+                                <option value="Warehouse Shifts">Warehouse Shifts</option>
+                                <option value="Driving Services">Driving Services</option>
+                                <option value="Retail Support">Retail Support</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input w-full rounded-xl px-4 py-3 text-white transition" placeholder="(555) 123-4567">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-300 font-medium mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="4" required class="form-input w-full rounded-xl px-4 py-3 text-white transition resize-none" placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full gradient-bg text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition shadow-xl">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="form-success" class="hidden mt-6 success-message rounded-xl p-4 text-center">
+                        ✓ Thank you! We'll be in touch soon.
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="card-partner rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-outer-space">Why Partner With HBG?</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-xl">🎯</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-outer-space">Direct Communication</h4>
+                                    <p class="text-gray-600">Work directly with us — no middlemen, no confusion.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-xl">📍</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-outer-space">Local Expertise</h4>
+                                    <p class="text-gray-600">Deep knowledge of the Ohio Tristate Area.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-xl">🏆</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-outer-space">Proven Track Record</h4>
+                                    <p class="text-gray-600">30+ years of satisfied clients and completed gigs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gradient-diagonal rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Service Area</h3>
+                        <p class="text-white/90 mb-4">Proudly serving the Ohio Tristate Area, including:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Ohio</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Kentucky</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Indiana</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">& Surrounding Areas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-24 hero-pattern-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">Our Team</span>
+                <h2 class="text-4xl font-extrabold mt-6 mb-4 text-white">Meet the People Behind HBG</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We're not just a service — we're real people committed to delivering excellence. Get to know the friendly faces you'll be working with.</p>
+            </div>
+            
+            <div id="team-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team members rendered dynamically -->
+                <div class="team-placeholder text-center text-gray-400 col-span-full py-12">
+                    <p>Team members will appear here once added via the customizer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-outer-space footer-border border-t">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center" data-customizer="logo">
+                        <span class="text-white font-extrabold" data-customizer="companyName">HBG</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-bold" data-customizer="companyName">HBG</p>
+                        <p class="text-gray-400 text-sm" data-customizer="tagline">"He Be Giggin' O!"</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-8">
+                    <a href="#home" class="text-gray-400 hover:text-shakespeare transition">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-shakespeare transition">About</a>
+                    <a href="#services" class="text-gray-400 hover:text-shakespeare transition">Services</a>
+                    <a href="#team" class="text-gray-400 hover:text-shakespeare transition">Team</a>
+                    <a href="#careers" class="text-gray-400 hover:text-shakespeare transition">Careers</a>
+                    <a href="#contact" class="text-gray-400 hover:text-shakespeare transition">Contact</a>
+                </div>
+                
+                <p class="text-gray-500 text-sm">© 2024 HBG. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    
+    <!-- Website Customizer Widget -->
+    <script src="js/customizer.js"></script>
+</body>
+</html>

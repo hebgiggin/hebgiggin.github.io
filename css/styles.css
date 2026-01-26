@@ -1,0 +1,217 @@
+/* ===================================
+   HBG - He Be Giggin' O!
+   Custom Styles
+   =================================== */
+
+/* ===== CSS Variables ===== */
+:root {
+    --outer-space: #242e33;
+    --outer-space-light: #2d3a40;
+    --outer-space-lighter: #3d4a50;
+    --green-white: #e8ece3;
+    --green-white-dark: #d8ddd2;
+    --shakespeare: #45b1d9;
+    --astral: #347baa;
+}
+
+/* ===== Base Styles ===== */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--green-white);
+}
+
+/* ===== Utility Classes ===== */
+
+/* Backgrounds */
+.bg-outer-space {
+    background-color: var(--outer-space);
+}
+
+.bg-green-white {
+    background-color: var(--green-white);
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--shakespeare) 0%, var(--astral) 100%);
+}
+
+.hero-pattern {
+    background-color: var(--green-white);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2345b1d9' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-pattern-dark {
+    background-color: var(--outer-space);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2345b1d9' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Text Colors */
+.text-shakespeare {
+    color: var(--shakespeare);
+}
+
+.text-astral {
+    color: var(--astral);
+}
+
+.text-outer-space {
+    color: var(--outer-space);
+}
+
+/* Border Colors */
+.border-shakespeare {
+    border-color: var(--shakespeare);
+}
+
+/* Hover States */
+.hover\:text-shakespeare:hover {
+    color: var(--shakespeare);
+}
+
+.hover\:bg-shakespeare:hover {
+    background-color: var(--shakespeare);
+}
+
+.focus\:border-shakespeare:focus {
+    border-color: var(--shakespeare);
+}
+
+/* ===== Component Styles ===== */
+
+/* Navigation */
+.nav-container {
+    background-color: rgba(232, 236, 227, 0.95);
+    border-bottom: 1px solid rgba(36, 46, 51, 0.1);
+}
+
+.nav-container.scrolled {
+    background-color: rgba(232, 236, 227, 0.98);
+}
+
+.mobile-menu {
+    background-color: var(--green-white);
+    border-color: var(--green-white-dark);
+}
+
+/* Cards */
+.card-dark {
+    background-color: var(--outer-space-light);
+    border: 1px solid var(--outer-space-lighter);
+}
+
+.card-dark-inner {
+    background-color: var(--outer-space-lighter);
+}
+
+.card-dark-transparent {
+    background-color: rgba(61, 74, 80, 0.5);
+}
+
+/* Form Elements */
+.form-input {
+    background-color: var(--outer-space-light);
+    border: 1px solid var(--outer-space-lighter);
+}
+
+.form-input:focus {
+    border-color: var(--shakespeare);
+    outline: none;
+}
+
+/* Sections */
+.section-services {
+    background-color: var(--green-white-dark);
+}
+
+.card-partner {
+    background-color: var(--green-white-dark);
+}
+
+/* Gradient Overlays */
+.gradient-card {
+    background: linear-gradient(to bottom right, var(--outer-space), var(--outer-space-light));
+}
+
+.gradient-horizontal {
+    background: linear-gradient(to right, var(--shakespeare), var(--astral));
+}
+
+.gradient-diagonal {
+    background: linear-gradient(to bottom right, var(--shakespeare), var(--astral));
+}
+
+/* Badge/Tag Styles */
+.tag-shakespeare {
+    background-color: rgba(69, 177, 217, 0.2);
+    color: var(--shakespeare);
+}
+
+/* Footer */
+.footer-border {
+    border-color: var(--outer-space-lighter);
+}
+
+/* Platform Banner */
+.platform-banner {
+    background-color: var(--green-white-dark);
+    border-color: rgba(36, 46, 51, 0.1);
+}
+
+/* Light Card Styles */
+.card-light {
+    background-color: white;
+    border: 1px solid rgba(36, 46, 51, 0.1);
+}
+
+.card-light-inner {
+    background-color: var(--green-white);
+}
+
+/* Success Message */
+.success-message {
+    background-color: rgba(34, 197, 94, 0.2);
+    border-color: rgb(34, 197, 94);
+    color: rgb(74, 222, 128);
+}
+
+/* ===== Animations ===== */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+}
+
+.service-icon {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1);
+}
+
+/* ===== Team Section ===== */
+.team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.bg-outer-space-light {
+    background-color: var(--outer-space-light);
+}
+
+.border-shakespeare {
+    border-color: var(--shakespeare);
+}
