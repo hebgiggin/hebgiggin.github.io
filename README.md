@@ -102,6 +102,28 @@ tags:
 3. Enter your current password, then your new password
 4. Click "Update Password"
 
+### 🚀 Publishing Changes to GitHub (Making Changes Live)
+
+**Important:** Changes made in the customizer are stored locally in your browser. To make changes visible to ALL visitors, you must publish to GitHub:
+
+1. **Make your changes** in the customizer
+2. **Save Changes** (click the 💾 button)
+3. Go to **⚙️ Settings** tab
+4. Click **📦 Download Files for GitHub**
+5. Two files will download:
+   - `index.html` - Your updated HTML with embedded settings
+   - `settings-backup.json` - Backup of your settings
+6. **Upload to GitHub:**
+   - Go to your GitHub repository
+   - Click on `index.html`
+   - Click the ✏️ pencil icon to edit
+   - Replace ALL content with your downloaded `index.html`
+   - Click **Commit changes**
+7. Wait 1-2 minutes for GitHub Pages to update
+8. Your changes are now live for everyone! 🎉
+
+**Pro Tip:** Keep the `settings-backup.json` file safe - you can import it later if needed.
+
 ### Color Presets
 The customizer includes 4 color presets:
 - **Original** - Default HBG blue theme

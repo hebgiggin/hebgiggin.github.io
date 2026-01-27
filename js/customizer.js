@@ -173,6 +173,17 @@
 
     // ===== Storage Functions =====
     function loadSettings() {
+        // First, check for embedded settings (from GitHub export)
+        if (window.HBG_EMBEDDED_SETTINGS) {
+            try {
+                settings = deepMerge(defaultSettings, window.HBG_EMBEDDED_SETTINGS);
+                console.log('Loaded embedded settings from GitHub export');
+            } catch (e) {
+                console.error('Failed to load embedded settings:', e);
+            }
+        }
+        
+        // Then, check localStorage for any local overrides (for admin editing)
         const saved = localStorage.getItem(CONFIG.storageKey);
         if (saved) {
             try {
@@ -1008,6 +1019,18 @@
     function renderSettingsTab() {
         return `
             <div class="customizer-section">
+                <h4>🚀 Publish to GitHub</h4>
+                <p class="customizer-help">Download updated files with your changes baked in, then upload to GitHub.</p>
+                
+                <button id="export-for-github" class="customizer-btn-primary" style="width:100%; margin-bottom:10px;">
+                    📦 Download Files for GitHub
+                </button>
+                <p class="customizer-help" style="font-size:11px; color:#888;">
+                    This downloads a ZIP with your customized index.html, CSS, and JS files. Upload these to your GitHub repository to make changes live for everyone.
+                </p>
+            </div>
+
+            <div class="customizer-section">
                 <h4>🔐 Change Password</h4>
                 <p class="customizer-help">Update your customizer password</p>
                 
@@ -1386,6 +1409,12 @@
                     resetAll();
                 }
             };
+        }
+
+        // Export for GitHub button
+        const exportGitHubBtn = document.getElementById('export-for-github');
+        if (exportGitHubBtn) {
+            exportGitHubBtn.onclick = exportForGitHub;
         }
 
         // CRM Event Listeners
@@ -2150,6 +2179,109 @@ Exported on ${new Date().toLocaleDateString()}
             }
         };
         reader.readAsText(file);
+    }
+
+    // ===== Export for GitHub =====
+    function exportForGitHub() {
+        showNotification('Generating files...', 'info');
+        
+        // Generate the settings loader script that will be embedded
+        const settingsLoaderScript = `
+    <!-- Embedded Customizer Settings -->
+    <script>
+        // These settings were exported from the HBG Website Customizer
+        // Last updated: ${new Date().toISOString()}
+        window.HBG_EMBEDDED_SETTINGS = ${JSON.stringify(settings, null, 2)};
+    </script>`;
+
+        // Fetch current HTML and modify it
+        fetch('index.html')
+            .then(response => response.text())
+            .then(html => {
+                // Remove any existing embedded settings
+                html = html.replace(/\s*<!-- Embedded Customizer Settings -->[\s\S]*?<\/script>/g, '');
+                
+                // Add new embedded settings before the closing </head> tag
+                html = html.replace('</head>', settingsLoaderScript + '\n</head>');
+                
+                // Create downloadable files
+                const files = [
+                    { name: 'index.html', content: html },
+                    { name: 'settings-backup.json', content: JSON.stringify({ settings, exportDate: new Date().toISOString(), version: '1.0' }, null, 2) }
+                ];
+                
+                // Download each file
+                files.forEach((file, index) => {
+                    setTimeout(() => {
+                        const blob = new Blob([file.content], { type: 'text/plain' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = file.name;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    }, index * 500);
+                });
+                
+                showNotification('Files downloaded! Upload to GitHub to go live.', 'success');
+            })
+            .catch(err => {
+                // If fetch fails (local file), generate from scratch
+                generateFilesManually();
+            });
+    }
+
+    function generateFilesManually() {
+        // Generate a complete index.html with embedded settings
+        const embeddedSettings = `window.HBG_EMBEDDED_SETTINGS = ${JSON.stringify(settings, null, 2)};`;
+        
+        const instructions = `
+/*
+ * HBG Website - Export Instructions
+ * ==================================
+ * 
+ * Your settings have been exported!
+ * 
+ * TO MAKE CHANGES LIVE ON GITHUB:
+ * 
+ * 1. Open your GitHub repository
+ * 2. Edit the file: js/customizer.js
+ * 3. Find the line: let settings = JSON.parse(JSON.stringify(defaultSettings));
+ * 4. Replace defaultSettings with the settings below
+ * 5. Commit the changes
+ * 
+ * YOUR EXPORTED SETTINGS:
+ */
+
+const EXPORTED_SETTINGS = ${JSON.stringify(settings, null, 2)};
+
+/*
+ * Copy the EXPORTED_SETTINGS object above and use it to replace
+ * the defaultSettings in your customizer.js file.
+ */
+`;
+        
+        const blob = new Blob([instructions], { type: 'text/javascript' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'hbg-exported-settings.js';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        // Also download the JSON backup
+        setTimeout(() => {
+            const backup = { settings, exportDate: new Date().toISOString(), version: '1.0' };
+            const blob2 = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const url2 = URL.createObjectURL(blob2);
+            const a2 = document.createElement('a');
+            a2.href = url2;
+            a2.download = 'hbg-settings-backup.json';
+            a2.click();
+            URL.revokeObjectURL(url2);
+        }, 500);
+        
+        showNotification('Settings exported! See downloaded file for instructions.', 'success');
     }
 
     function resetAll() {
