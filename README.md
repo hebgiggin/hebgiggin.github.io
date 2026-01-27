@@ -110,17 +110,22 @@ tags:
 2. **Save Changes** (click the 💾 button)
 3. Go to **⚙️ Settings** tab
 4. Click **📦 Download Files for GitHub**
-5. Two files will download:
-   - `index.html` - Your updated HTML with embedded settings
-   - `settings-backup.json` - Backup of your settings
+5. Three files will download:
+   - `settings.js` - Your website settings (colors, text, services, team)
+   - `images.js` - Your uploaded images (logo, hero, team photos)
+   - `settings-backup.json` - Complete backup file
 6. **Upload to GitHub:**
    - Go to your GitHub repository
-   - Click on `index.html`
-   - Click the ✏️ pencil icon to edit
-   - Replace ALL content with your downloaded `index.html`
+   - Navigate to the `js/` folder
+   - Upload `settings.js` (replace existing)
+   - Upload `images.js` (replace existing)
    - Click **Commit changes**
 7. Wait 1-2 minutes for GitHub Pages to update
 8. Your changes are now live for everyone! 🎉
+
+**Why separate files?**
+- `settings.js` - Small, human-readable, easy to edit manually
+- `images.js` - Contains large base64 images, kept separate for manageability
 
 **Pro Tip:** Keep the `settings-backup.json` file safe - you can import it later if needed.
 
@@ -149,9 +154,20 @@ hbg-website/
 │   └── styles.css      # Custom CSS styles
 ├── js/
 │   ├── script.js       # Main JavaScript functionality
-│   └── customizer.js   # Website Customizer widget
+│   ├── customizer.js   # Website Customizer widget
+│   ├── settings.js     # Your website settings (colors, text, services, team)
+│   └── images.js       # Your uploaded images (logo, hero, team photos)
 └── README.md           # This file
 ```
+
+### Why Separate Files?
+
+| File | Purpose | Size |
+|------|---------|------|
+| **settings.js** | Colors, text, services, team info | Small, easy to edit |
+| **images.js** | Base64 encoded images | Large, but isolated |
+
+This structure keeps your settings files manageable and editor-friendly!
 
 ## 🚀 Getting Started
 

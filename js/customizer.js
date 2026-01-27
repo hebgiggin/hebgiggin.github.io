@@ -2185,103 +2185,239 @@ Exported on ${new Date().toLocaleDateString()}
     function exportForGitHub() {
         showNotification('Generating files...', 'info');
         
-        // Generate the settings loader script that will be embedded
-        const settingsLoaderScript = `
-    <!-- Embedded Customizer Settings -->
-    <script>
-        // These settings were exported from the HBG Website Customizer
-        // Last updated: ${new Date().toISOString()}
-        window.HBG_EMBEDDED_SETTINGS = ${JSON.stringify(settings, null, 2)};
-    </script>`;
-
-        // Fetch current HTML and modify it
-        fetch('index.html')
-            .then(response => response.text())
-            .then(html => {
-                // Remove any existing embedded settings
-                html = html.replace(/\s*<!-- Embedded Customizer Settings -->[\s\S]*?<\/script>/g, '');
-                
-                // Add new embedded settings before the closing </head> tag
-                html = html.replace('</head>', settingsLoaderScript + '\n</head>');
-                
-                // Create downloadable files
-                const files = [
-                    { name: 'index.html', content: html },
-                    { name: 'settings-backup.json', content: JSON.stringify({ settings, exportDate: new Date().toISOString(), version: '1.0' }, null, 2) }
-                ];
-                
-                // Download each file
-                files.forEach((file, index) => {
-                    setTimeout(() => {
-                        const blob = new Blob([file.content], { type: 'text/plain' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = file.name;
-                        a.click();
-                        URL.revokeObjectURL(url);
-                    }, index * 500);
-                });
-                
-                showNotification('Files downloaded! Upload to GitHub to go live.', 'success');
-            })
-            .catch(err => {
-                // If fetch fails (local file), generate from scratch
-                generateFilesManually();
+        // Separate images from settings to keep files manageable
+        const settingsWithoutImages = JSON.parse(JSON.stringify(settings));
+        const images = {
+            logo: settings.images.logo,
+            heroImage: settings.images.heroImage,
+            favicon: settings.images.favicon,
+            teamPhotos: {}
+        };
+        
+        // Extract team photos
+        if (settings.team && settings.team.length > 0) {
+            settings.team.forEach((member, index) => {
+                if (member.photo) {
+                    images.teamPhotos[member.id] = member.photo;
+                    settingsWithoutImages.team[index].photo = `__TEAM_PHOTO_${member.id}__`;
+                }
             });
+        }
+        
+        // Clear large base64 from main settings, use placeholders
+        settingsWithoutImages.images.logo = settings.images.logo ? '__LOGO__' : null;
+        settingsWithoutImages.images.heroImage = settings.images.heroImage ? '__HERO_IMAGE__' : null;
+        settingsWithoutImages.images.favicon = settings.images.favicon ? '__FAVICON__' : null;
+
+        // Generate settings.js file content (formatted nicely)
+        const settingsFileContent = `/**
+ * HBG Website Settings
+ * Generated: ${new Date().toISOString()}
+ * 
+ * This file contains your website customization settings.
+ * Edit carefully or use the Website Customizer to make changes.
+ */
+
+window.HBG_EMBEDDED_SETTINGS = {
+    // === COLORS ===
+    colors: {
+        outerSpace: "${settings.colors.outerSpace}",
+        greenWhite: "${settings.colors.greenWhite}",
+        shakespeare: "${settings.colors.shakespeare}",
+        astral: "${settings.colors.astral}"
+    },
+
+    // === FONTS ===
+    fonts: ${JSON.stringify(settings.fonts, null, 8).replace(/^/gm, '    ').trim()},
+
+    // === SECTIONS VISIBILITY ===
+    sections: {
+        home: ${settings.sections.home},
+        about: ${settings.sections.about},
+        services: ${settings.sections.services},
+        careers: ${settings.sections.careers},
+        contact: ${settings.sections.contact},
+        team: ${settings.sections.team}
+    },
+
+    // === SECTION ORDER ===
+    sectionOrder: ${JSON.stringify(settings.sectionOrder)},
+
+    // === SECTION BACKGROUNDS ===
+    backgrounds: {
+        home: "${settings.backgrounds.home}",
+        about: "${settings.backgrounds.about}",
+        services: "${settings.backgrounds.services}",
+        careers: "${settings.backgrounds.careers}",
+        contact: "${settings.backgrounds.contact}",
+        team: "${settings.backgrounds.team}"
+    },
+
+    // === TEXT CONTENT ===
+    text: ${JSON.stringify(settings.text, null, 8).replace(/^/gm, '    ').trim()},
+
+    // === SERVICES ===
+    services: [
+${settings.services.map(service => `        {
+            id: "${service.id}",
+            name: "${service.name.replace(/"/g, '\\"')}",
+            description: "${service.description.replace(/"/g, '\\"').replace(/\n/g, '\\n')}",
+            icon: "${service.icon}",
+            enabled: ${service.enabled}
+        }`).join(',\n')}
+    ],
+
+    // === TEAM MEMBERS ===
+    team: [
+${settings.team.map(member => `        {
+            id: "${member.id}",
+            name: "${member.name.replace(/"/g, '\\"')}",
+            role: "${member.role.replace(/"/g, '\\"')}",
+            bio: "${(member.bio || '').replace(/"/g, '\\"').replace(/\n/g, '\\n')}",
+            email: "${member.email || ''}",
+            phone: "${member.phone || ''}",
+            linkedin: "${member.linkedin || ''}",
+            photo: null,
+            enabled: ${member.enabled}
+        }`).join(',\n')}
+    ],
+
+    // === IMAGES ===
+    // Images are stored in js/images.js to keep this file manageable
+    images: {
+        logo: null,
+        heroImage: null,
+        favicon: null
+    }
+};
+
+// Load images from separate file if available
+if (window.HBG_IMAGES) {
+    window.HBG_EMBEDDED_SETTINGS.images = window.HBG_IMAGES.images || window.HBG_EMBEDDED_SETTINGS.images;
+    
+    // Restore team photos
+    if (window.HBG_IMAGES.teamPhotos && window.HBG_EMBEDDED_SETTINGS.team) {
+        window.HBG_EMBEDDED_SETTINGS.team.forEach(member => {
+            if (window.HBG_IMAGES.teamPhotos[member.id]) {
+                member.photo = window.HBG_IMAGES.teamPhotos[member.id];
+            }
+        });
+    }
+}
+`;
+
+        // Generate images.js file content
+        const imagesFileContent = `/**
+ * HBG Website Images
+ * Generated: ${new Date().toISOString()}
+ * 
+ * This file contains base64-encoded images.
+ * Note: These are long strings - this is normal for base64 images.
+ */
+
+window.HBG_IMAGES = {
+    images: {
+        logo: ${images.logo ? `"${images.logo}"` : 'null'},
+        heroImage: ${images.heroImage ? `"${images.heroImage}"` : 'null'},
+        favicon: ${images.favicon ? `"${images.favicon}"` : 'null'}
+    },
+    teamPhotos: {
+${Object.entries(images.teamPhotos).map(([id, photo]) => `        "${id}": "${photo}"`).join(',\n')}
+    }
+};
+`;
+
+        // Generate updated index.html that loads the settings files
+        const indexHtmlAdditions = `
+    <!-- HBG Website Settings - Load before customizer.js -->
+    <script src="js/images.js"><\/script>
+    <script src="js/settings.js"><\/script>`;
+
+        // Create downloadable files
+        const files = [
+            { 
+                name: 'js/settings.js', 
+                content: settingsFileContent,
+                description: 'Your website settings (colors, text, services, team)'
+            },
+            { 
+                name: 'js/images.js', 
+                content: imagesFileContent,
+                description: 'Your uploaded images (logo, hero, team photos)'
+            },
+            { 
+                name: 'settings-backup.json', 
+                content: JSON.stringify({ 
+                    settings, 
+                    exportDate: new Date().toISOString(), 
+                    version: '1.0' 
+                }, null, 2),
+                description: 'Complete backup file (for importing later)'
+            }
+        ];
+        
+        // Download each file with a delay
+        files.forEach((file, index) => {
+            setTimeout(() => {
+                const blob = new Blob([file.content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                // Remove folder prefix for download
+                a.download = file.name.replace('js/', '');
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                if (index === files.length - 1) {
+                    showNotification('Files downloaded! See instructions below.', 'success');
+                    showExportInstructions();
+                }
+            }, index * 500);
+        });
+    }
+
+    function showExportInstructions() {
+        const modal = document.createElement('div');
+        modal.id = 'export-instructions-modal';
+        modal.innerHTML = `
+            <div class="export-modal-backdrop"></div>
+            <div class="export-modal-content">
+                <h3>📦 Files Downloaded!</h3>
+                <p>Upload these files to your GitHub repository:</p>
+                <ol>
+                    <li><strong>settings.js</strong> → Upload to <code>js/</code> folder</li>
+                    <li><strong>images.js</strong> → Upload to <code>js/</code> folder</li>
+                    <li><strong>settings-backup.json</strong> → Keep as backup (optional upload)</li>
+                </ol>
+                <p>⚠️ <strong>Important:</strong> Make sure your index.html includes these lines before the customizer.js script:</p>
+                <pre>&lt;script src="js/images.js"&gt;&lt;/script&gt;
+&lt;script src="js/settings.js"&gt;&lt;/script&gt;</pre>
+                <button onclick="this.closest('#export-instructions-modal').remove()">Got it!</button>
+            </div>
+        `;
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:10003;display:flex;align-items:center;justify-content:center;';
+        modal.querySelector('.export-modal-backdrop').style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);';
+        modal.querySelector('.export-modal-content').style.cssText = 'position:relative;background:#1a1f23;padding:24px;border-radius:16px;max-width:500px;margin:20px;color:#fff;font-family:Poppins,sans-serif;';
+        modal.querySelector('h3').style.cssText = 'margin:0 0 16px 0;font-size:20px;';
+        modal.querySelector('ol').style.cssText = 'margin:16px 0;padding-left:20px;line-height:1.8;';
+        modal.querySelector('pre').style.cssText = 'background:#242e33;padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;margin:12px 0;';
+        modal.querySelector('code').style.cssText = 'background:#242e33;padding:2px 6px;border-radius:4px;font-size:12px;';
+        modal.querySelector('button').style.cssText = 'width:100%;padding:12px;background:linear-gradient(135deg,#45b1d9,#347baa);border:none;border-radius:8px;color:#fff;font-size:16px;font-weight:600;cursor:pointer;margin-top:16px;';
+        document.body.appendChild(modal);
     }
 
     function generateFilesManually() {
-        // Generate a complete index.html with embedded settings
-        const embeddedSettings = `window.HBG_EMBEDDED_SETTINGS = ${JSON.stringify(settings, null, 2)};`;
-        
-        const instructions = `
-/*
- * HBG Website - Export Instructions
- * ==================================
- * 
- * Your settings have been exported!
- * 
- * TO MAKE CHANGES LIVE ON GITHUB:
- * 
- * 1. Open your GitHub repository
- * 2. Edit the file: js/customizer.js
- * 3. Find the line: let settings = JSON.parse(JSON.stringify(defaultSettings));
- * 4. Replace defaultSettings with the settings below
- * 5. Commit the changes
- * 
- * YOUR EXPORTED SETTINGS:
- */
-
-const EXPORTED_SETTINGS = ${JSON.stringify(settings, null, 2)};
-
-/*
- * Copy the EXPORTED_SETTINGS object above and use it to replace
- * the defaultSettings in your customizer.js file.
- */
-`;
-        
-        const blob = new Blob([instructions], { type: 'text/javascript' });
+        // Fallback - just export the settings backup
+        const backup = { settings, exportDate: new Date().toISOString(), version: '1.0' };
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'hbg-exported-settings.js';
+        a.download = 'hbg-settings-backup.json';
         a.click();
         URL.revokeObjectURL(url);
         
-        // Also download the JSON backup
-        setTimeout(() => {
-            const backup = { settings, exportDate: new Date().toISOString(), version: '1.0' };
-            const blob2 = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-            const url2 = URL.createObjectURL(blob2);
-            const a2 = document.createElement('a');
-            a2.href = url2;
-            a2.download = 'hbg-settings-backup.json';
-            a2.click();
-            URL.revokeObjectURL(url2);
-        }, 500);
-        
-        showNotification('Settings exported! See downloaded file for instructions.', 'success');
+        showNotification('Backup exported! Import this file on another device to restore.', 'success');
     }
 
     function resetAll() {
