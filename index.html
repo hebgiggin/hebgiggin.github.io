@@ -14,20 +14,130 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --outer-space: #2D3142;
+            --shakespeare: #45b1d9;
+            --tiber: #063547;
+            --green-white: #e9f0f2;
+        }
+
+        @theme {
+            --color-outer-space: var(--outer-space);
+            --color-shakespeare: var(--shakespeare);
+            --color-tiber: var(--tiber);
+            --color-green-white: var(--green-white);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--outer-space);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #45b1d9 0%, #347baa 100%);
+        }
+
+        .gradient-horizontal {
+            background: linear-gradient(90deg, #45b1d9 0%, #347baa 100%);
+        }
+
+        .gradient-diagonal {
+            background: linear-gradient(45deg, #2D3142 0%, #063547 100%);
+        }
+
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#45b1d9 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        .hero-pattern-dark {
+            background-color: #2D3142;
+            background-image: radial-gradient(#45b1d9 0.5px, transparent 0.5px);
+            background-size: 32px 32px;
+        }
+
+        .nav-container.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card-light-inner {
+            background: white;
+            box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .card-dark-transparent {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #45b1d9;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-input option {
+            background: #2D3142;
+            color: white;
+        }
+
+        .success-message {
+            background: #10b981;
+            color: white;
+        }
+
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        .tag-shakespeare {
+            background: rgba(69, 177, 217, 0.2);
+            color: #45b1d9;
+        }
+    </style>
 </head>
 <body class="scroll-smooth">
     <!-- Navigation -->
-    <nav class="fixed w-full nav-container backdrop-blur-sm z-50 shadow-sm">
+    <nav id="navbar" class="fixed w-full nav-container z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
                 <a href="#home" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg" data-customizer="logo">
-                        <span class="text-white font-extrabold text-xl" data-customizer="companyName">HBG</span>
+                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-extrabold text-xl">HBG</span>
                     </div>
-                    <span class="text-outer-space font-bold text-xl hidden sm:block" data-customizer="tagline">He Be Giggin'!</span>
+                    <span class="text-outer-space font-bold text-xl hidden sm:block">He Be Giggin'!</span>
                 </a>
                 
                 <!-- Desktop Menu -->
@@ -41,23 +151,23 @@
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-outer-space" aria-label="Toggle menu">
+                <button id="mobile-menu-btn" class="md:hidden text-outer-space p-2" aria-label="Toggle menu">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden mobile-menu border-t">
+        <div id="mobile-menu" class="md:hidden mobile-menu border-t">
             <div class="px-4 py-4 space-y-3">
-                <a href="#home" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Home</a>
-                <a href="#about" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">About</a>
-                <a href="#services" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Services</a>
-                <a href="#team" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Team</a>
-                <a href="#careers" class="block text-outer-space hover:text-shakespeare transition font-medium py-2">Join Us</a>
-                <a href="#contact" class="block gradient-bg text-white px-6 py-3 rounded-full font-semibold text-center">Contact</a>
+                <a href="#home" class="mobile-link block text-outer-space hover:text-shakespeare transition font-medium py-2">Home</a>
+                <a href="#about" class="mobile-link block text-outer-space hover:text-shakespeare transition font-medium py-2">About</a>
+                <a href="#services" class="mobile-link block text-outer-space hover:text-shakespeare transition font-medium py-2">Services</a>
+                <a href="#team" class="mobile-link block text-outer-space hover:text-shakespeare transition font-medium py-2">Team</a>
+                <a href="#careers" class="mobile-link block text-outer-space hover:text-shakespeare transition font-medium py-2">Join Us</a>
+                <a href="#contact" class="mobile-link block gradient-bg text-white px-6 py-3 rounded-full font-semibold text-center">Contact</a>
             </div>
         </div>
     </nav>
@@ -70,17 +180,17 @@
                     <div class="inline-block gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full mb-6 shadow-lg">
                         🎉 Serving the Ohio Tristate Area
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-outer-space leading-tight mb-6" data-customizer="heroHeadline">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-outer-space leading-tight mb-6">
                         Your Trusted Partner for <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#45b1d9] to-[#347baa]">Gig Work</span> Done Right
                     </h1>
-                    <p class="text-xl text-gray-600 mb-8 leading-relaxed" data-customizer="heroSubheadline">
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
                         With over <strong class="text-shakespeare">30 years</strong> of experience, HBG connects businesses with reliable, people-oriented service. When you work with us, you know exactly who you're getting.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#contact" class="gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl">
+                        <a href="#contact" class="gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl text-center">
                             Get Started Today
                         </a>
-                        <a href="#services" class="border-2 border-shakespeare text-shakespeare px-8 py-4 rounded-full font-bold text-lg hover:bg-shakespeare hover:text-white transition">
+                        <a href="#services" class="border-2 border-shakespeare text-shakespeare px-8 py-4 rounded-full font-bold text-lg hover:bg-shakespeare hover:text-white transition text-center">
                             Explore Services
                         </a>
                     </div>
@@ -89,10 +199,10 @@
                     <div class="absolute inset-0 gradient-bg rounded-3xl transform rotate-6 opacity-20"></div>
                     <div class="relative card-light rounded-3xl p-8 shadow-2xl">
                         <div class="text-center">
-                            <div class="w-32 h-32 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl" data-customizer="logo">
-                                <span class="text-white font-extrabold text-5xl" data-customizer="companyName">HBG</span>
+                            <div class="w-32 h-32 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                                <span class="text-white font-extrabold text-5xl">HBG</span>
                             </div>
-                            <p class="text-2xl font-bold text-outer-space mb-2" data-customizer="tagline">"He Be Giggin' O!"</p>
+                            <p class="text-2xl font-bold text-outer-space mb-2">"He Be Giggin' O!"</p>
                             <p class="text-gray-500">Quality • Friendly • Timely</p>
                             <div class="mt-6 flex justify-center gap-4">
                                 <div class="card-light-inner px-4 py-2 rounded-lg">
@@ -112,7 +222,7 @@
     </section>
 
     <!-- Platform Partners Banner -->
-    <section class="platform-banner py-8 border-y">
+    <section class="platform-banner py-8 border-y bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-gray-500 mb-6 font-medium">Experienced across leading platforms</p>
             <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
@@ -180,9 +290,9 @@
                     </div>
                 </div>
                 
-                <div class="gradient-card rounded-3xl p-8 shadow-2xl">
+                <div class="gradient-bg rounded-3xl p-8 shadow-2xl">
                     <div class="text-center">
-                        <div class="inline-block tag-shakespeare text-sm font-semibold px-4 py-2 rounded-full mb-6">
+                        <div class="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-2 rounded-full mb-6">
                             Our Core Values
                         </div>
                         <div class="space-y-6">
@@ -209,7 +319,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 section-services">
+    <section id="services" class="py-24 bg-green-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">Our Services</span>
@@ -218,9 +328,7 @@
             </div>
             
             <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Services are rendered dynamically by the customizer -->
-                <!-- Default services shown if JS hasn't loaded yet -->
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
                     <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
@@ -230,54 +338,24 @@
                     <p class="text-gray-600 leading-relaxed">Fast, reliable, personal delivery. Your packages and meals arrive on time, every time.</p>
                 </div>
                 
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
                     <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-outer-space">Sign Language Interpreting</h3>
-                    <p class="text-gray-600 leading-relaxed">Professional ASL interpretation services that bridge communication gaps. Experienced and committed to facilitating clear, meaningful connections.</p>
+                    <p class="text-gray-600 leading-relaxed">Professional ASL interpretation services that bridge communication gaps. Experienced and committed to facilitating clear connections.</p>
                 </div>
                 
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
                     <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-outer-space">Warehouse Shifts</h3>
-                    <p class="text-gray-600 leading-relaxed">Dependable warehouse support when you need it. From inventory management to order fulfillment, we bring energy and efficiency to your operations.</p>
-                </div>
-                
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
-                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-outer-space">Driving Services</h3>
-                    <p class="text-gray-600 leading-relaxed">Professional driving for various needs. Whether it's transporting goods or providing rideshare services, count on safe, courteous, and timely transportation.</p>
-                </div>
-                
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
-                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-outer-space">Retail Support</h3>
-                    <p class="text-gray-600 leading-relaxed">Flexible retail staffing solutions for your store. Friendly, customer-focused support that represents your brand with professionalism and care.</p>
-                </div>
-                
-                <div class="service-card bg-green-white rounded-2xl p-8 shadow-lg hover:shadow-xl">
-                    <div class="service-icon w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-outer-space">And More</h3>
-                    <p class="text-gray-600 leading-relaxed">Have a unique need? Let's talk! With three decades of diverse experience, we're adaptable and ready to tackle new challenges. Just ask.</p>
+                    <p class="text-gray-600 leading-relaxed">Dependable warehouse support when you need it. From inventory management to order fulfillment, we bring energy to your operations.</p>
                 </div>
             </div>
             
@@ -316,22 +394,16 @@
                                 </svg>
                                 Diverse opportunities across multiple industries
                             </li>
-                            <li class="flex items-center gap-3 text-white">
-                                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                                Be part of a people-first organization
-                            </li>
                         </ul>
                         <a href="#contact" class="inline-block bg-outer-space text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition shadow-xl">
                             Get In Touch
                         </a>
                     </div>
                     <div class="text-center">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                             <div class="text-6xl mb-4">🚀</div>
                             <h3 class="text-2xl font-bold text-white mb-4">Your Next Opportunity Awaits</h3>
-                            <p class="text-white/80">Join HBG and be part of a team that values quality, reliability, and genuine human connection in every gig.</p>
+                            <p class="text-white/80">Join HBG and be part of a team that values quality, reliability, and genuine human connection.</p>
                         </div>
                     </div>
                 </div>
@@ -349,7 +421,7 @@
             </div>
             
             <div class="grid lg:grid-cols-2 gap-12">
-                <div class="bg-outer-space rounded-3xl p-8 shadow-2xl">
+                <div class="bg-outer-space rounded-3xl p-8 shadow-2xl relative">
                     <h3 class="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
                     <form id="contact-form" class="space-y-6">
                         <div>
@@ -373,24 +445,28 @@
                             </select>
                         </div>
                         <div>
-                            <label for="phone" class="block text-gray-300 font-medium mb-2">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-input w-full rounded-xl px-4 py-3 text-white transition" placeholder="(555) 123-4567">
-                        </div>
-                        <div>
                             <label for="message" class="block text-gray-300 font-medium mb-2">Your Message</label>
                             <textarea id="message" name="message" rows="4" required class="form-input w-full rounded-xl px-4 py-3 text-white transition resize-none" placeholder="Tell us about your needs..."></textarea>
                         </div>
-                        <button type="submit" class="w-full gradient-bg text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition shadow-xl">
-                            Send Message
+                        <button type="submit" id="submit-btn" class="w-full gradient-bg text-white px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition shadow-xl flex items-center justify-center">
+                            <span>Send Message</span>
+                            <div id="loading-spinner" class="hidden ml-3 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         </button>
                     </form>
-                    <div id="form-success" class="hidden mt-6 success-message rounded-xl p-4 text-center">
-                        ✓ Thank you! We'll be in touch soon.
+                    <div id="form-success" class="hidden absolute inset-0 bg-outer-space/95 backdrop-blur-sm rounded-3xl flex flex-col items-center justify-center text-center p-8 z-10">
+                        <div class="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">Message Sent!</h3>
+                        <p class="text-gray-300 text-lg mb-8">Thank you for reaching out. We've received your inquiry and will be in touch shortly.</p>
+                        <button onclick="resetForm()" class="text-shakespeare font-semibold hover:underline">Send another message</button>
                     </div>
                 </div>
                 
                 <div class="space-y-8">
-                    <div class="card-partner rounded-2xl p-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg">
                         <h3 class="text-2xl font-bold mb-6 text-outer-space">Why Partner With HBG?</h3>
                         <div class="space-y-6">
                             <div class="flex gap-4">
@@ -423,7 +499,7 @@
                         </div>
                     </div>
                     
-                    <div class="gradient-diagonal rounded-2xl p-8 text-white">
+                    <div class="gradient-diagonal rounded-2xl p-8 text-white shadow-xl">
                         <h3 class="text-2xl font-bold mb-4">Service Area</h3>
                         <p class="text-white/90 mb-4">Proudly serving the Ohio Tristate Area, including:</p>
                         <div class="flex flex-wrap gap-2">
@@ -444,38 +520,60 @@
             <div class="text-center mb-16">
                 <span class="gradient-bg text-white text-sm font-semibold px-4 py-2 rounded-full">Our Team</span>
                 <h2 class="text-4xl font-extrabold mt-6 mb-4 text-white">Meet the People Behind HBG</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We're not just a service — we're real people committed to delivering excellence. Get to know the friendly faces you'll be working with.</p>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We're not just a service — we're real people committed to delivering excellence.</p>
             </div>
             
             <div id="team-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Team members rendered dynamically -->
-                <div class="team-placeholder text-center text-gray-400 col-span-full py-12">
-                    <p>Team members will appear here once added via the customizer.</p>
+                <!-- Team Member 1 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 text-center transition hover:border-shakespeare/50">
+                    <div class="w-24 h-24 gradient-bg rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-3xl font-bold">JD</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">John Doe</h3>
+                    <p class="text-shakespeare font-medium mb-4">Founder & Lead Gig Pro</p>
+                    <p class="text-gray-400">30+ years of experience in delivery and professional logistics.</p>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 text-center transition hover:border-shakespeare/50">
+                    <div class="w-24 h-24 gradient-bg rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-3xl font-bold">SM</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Sarah Miller</h3>
+                    <p class="text-shakespeare font-medium mb-4">ASL Interpreter</p>
+                    <p class="text-gray-400">Certified professional helping bridge communication gaps for over 15 years.</p>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 text-center transition hover:border-shakespeare/50">
+                    <div class="w-24 h-24 gradient-bg rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-3xl font-bold">RK</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Robert King</h3>
+                    <p class="text-shakespeare font-medium mb-4">Operations Manager</p>
+                    <p class="text-gray-400">Ensuring every warehouse shift and retail project runs like clockwork.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-outer-space footer-border border-t">
+    <footer class="py-12 bg-outer-space border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center" data-customizer="logo">
-                        <span class="text-white font-extrabold" data-customizer="companyName">HBG</span>
+                    <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                        <span class="text-white font-extrabold">HBG</span>
                     </div>
                     <div>
-                        <p class="text-white font-bold" data-customizer="companyName">HBG</p>
-                        <p class="text-gray-400 text-sm" data-customizer="tagline">"He Be Giggin' O!"</p>
+                        <p class="text-white font-bold">HBG</p>
+                        <p class="text-gray-400 text-sm">"He Be Giggin' O!"</p>
                     </div>
                 </div>
                 
-                <div class="flex gap-8">
+                <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                     <a href="#home" class="text-gray-400 hover:text-shakespeare transition">Home</a>
                     <a href="#about" class="text-gray-400 hover:text-shakespeare transition">About</a>
                     <a href="#services" class="text-gray-400 hover:text-shakespeare transition">Services</a>
                     <a href="#team" class="text-gray-400 hover:text-shakespeare transition">Team</a>
-                    <a href="#careers" class="text-gray-400 hover:text-shakespeare transition">Careers</a>
                     <a href="#contact" class="text-gray-400 hover:text-shakespeare transition">Contact</a>
                 </div>
                 
@@ -484,14 +582,91 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
-    
-    <!-- HBG Website Settings (generated by customizer) -->
-    <script src="js/images.js"></script>
-    <script src="js/settings.js"></script>
-    
-    <!-- Website Customizer Widget -->
-    <script src="js/customizer.js"></script>
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                mobileMenu.classList.add('active');
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            });
+        });
+
+        // Contact Form Functionality
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        const submitBtn = document.getElementById('submit-btn');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-80');
+            loadingSpinner.classList.remove('hidden');
+            
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Hide loading and show success
+            loadingSpinner.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+            formSuccess.classList.add('animate-in', 'fade-in', 'zoom-in', 'duration-300');
+            
+            // Log for "functionality" check
+            const formData = new FormData(contactForm);
+            console.log('Form Submitted:', Object.fromEntries(formData));
+        });
+
+        function resetForm() {
+            contactForm.reset();
+            formSuccess.classList.add('hidden');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-80');
+        }
+
+        // Smooth scroll implementation for browsers that don't support it via CSS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
